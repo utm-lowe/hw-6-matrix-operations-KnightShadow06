@@ -41,14 +41,9 @@ void plotTrajectory(const vector<Matrix>& trajectory, int gridWidth, int gridHei
 int main() {
     // Get the initial conditions
     double x,y,vx,vy;
-    cout << "Position is in meters and velocity is in meters per second." << endl;
-    cout << "Initial x position: ";
     cin >> x;
-    cout << "Initial y position: ";
     cin >> y;
-    cout << "Inital x velocity: ";
     cin >> vx;
-    cout << "Inital y velocity: ";
     cin >> vy;
 
     // Initial position (x, y)
@@ -65,7 +60,6 @@ int main() {
 
     // Simulation duration
     double duration; // seconds
-    cout << "Simulation Duration (seconds): ";
     cin >> duration;
 
     // Number of steps

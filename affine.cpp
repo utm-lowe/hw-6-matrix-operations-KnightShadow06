@@ -72,12 +72,13 @@ int main()
     Matrix transform = transformMenu();
 
     // Display the transformation matrix
-    cout << "Transformation Matrix: " << endl;
+    //cout << "Transformation Matrix: " << endl;
+    cout << transform << endl;
     cout << transform << endl;
     cout << endl;
 
     // transform points
-    while(cin) {
+    while (cin >> ws && !cin.eof()) {
         Matrix point = getPoint();
         point = transform * point;
 
@@ -142,30 +143,24 @@ Matrix transformMenu()
 
     do {
         // get the choice
-        cout << "(T)ranslate, (R)otate, (S)cale, or (D)one? ";
         cin >> choice;
         choice = toupper(choice);
 
         switch(choice) {
             case 'T':
-                cout << "Enter tx and ty: ";
                 cin >> x >> y;
                 result = translate(x, y) * result;
                 break;
             case 'R':
-                cout << "Enter angle: ";
                 cin >> angle;
                 result = transRotate(angle) * result;
                 break;
             case 'S':
-                cout << "Enter sx and sy: ";
                 cin >> x >> y;
                 result = transScale(x, y) * result;
                 break;
             case 'D':
                 break;
-            default:
-                cout << "Invalid choice" << endl;
         }
 
     }while(choice != 'D');
@@ -178,7 +173,6 @@ Matrix transformMenu()
 Matrix getPoint() 
 {
     double x, y;
-    cout << "Enter x and y: ";
     cin >> x >> y;
     Matrix point(3, 1);
     point.at(0, 0) = x;
