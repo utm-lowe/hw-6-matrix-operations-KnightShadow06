@@ -7,6 +7,9 @@
  * @copyright Copyright (c) 2024
  * 
  */
+
+ //Functions from CoPilot, but I have used them to learn and take notes.
+
 #include "matrix.h"
 #include <iostream>
 #include <cmath>
