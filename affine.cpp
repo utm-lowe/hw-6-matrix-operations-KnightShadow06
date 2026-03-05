@@ -10,6 +10,7 @@
 #include "matrix.h"
 #include <iostream>
 #include <cmath>
+#include <cctype>
 
 using namespace std;
 
@@ -75,10 +76,7 @@ int main()
     // transform points
     while(cin) {
         Matrix point = getPoint();
-
-        // TODO: Write code to transform the point. This should be a single
-        //       line of code!
-        // YOUR CODE HERE
+        point = transform * point;
 
         // If we have a new point, display it.
         if(cin) {
@@ -92,46 +90,43 @@ int main()
 // build an identity matrix
 Matrix transIdent()
 {
-    // TODO: Build and return a 3x3 identity matrix. The identity matrix
-    //       should look like this:
-    //         1 0 0
-    //         0 1 0
-    //         0 0 1
-    // YOUR CODE HERE
+    Matrix id(3, 3);
+    id.at(0, 0) = 1; id.at(0, 1) = 0; id.at(0, 2) = 0;
+    id.at(1, 0) = 0; id.at(1, 1) = 1; id.at(1, 2) = 0;
+    id.at(2, 0) = 0; id.at(2, 1) = 0; id.at(2, 2) = 1;
+    return id;
 }
 
 
 // build a rotation matrix
 Matrix transRotate(double angle)
 {
-    // TODO: Build and return a rotation matrix. The rotation matrix should
-    //       look like this:
-    //         cos(angle) -sin(angle) 0
-    //         sin(angle)  cos(angle) 0
-    //         0           0          1
-    // YOUR CODE HERE
+    double rad = angle * M_PI / 180.0;
+    Matrix rot(3, 3);
+    rot.at(0, 0) = cos(rad); rot.at(0, 1) = -sin(rad); rot.at(0, 2) = 0;
+    rot.at(1, 0) = sin(rad); rot.at(1, 1) = cos(rad); rot.at(1, 2) = 0;
+    rot.at(2, 0) = 0; rot.at(2, 1) = 0; rot.at(2, 2) = 1;
+    return rot;
 }
 
 // build a scaling matrix
 Matrix transScale(double sx, double sy) 
 {
-    // TODO: Build and return a scaling matrix. The scaling matrix should
-    //       look like this:
-    //         sx 0  0
-    //         0  sy 0
-    //         0  0  1
-    // YOUR CODE HERE
+    Matrix scale(3, 3);
+    scale.at(0, 0) = sx; scale.at(0, 1) = 0; scale.at(0, 2) = 0;
+    scale.at(1, 0) = 0; scale.at(1, 1) = sy; scale.at(1, 2) = 0;
+    scale.at(2, 0) = 0; scale.at(2, 1) = 0; scale.at(2, 2) = 1;
+    return scale;
 }
 
 // build a translation matrix
 Matrix translate(double tx, double ty) 
 {
-    // TODO: build and return the translation matrix. The translation
-    //       matrix should look like this:
-    //         1 0 tx
-    //         0 1 ty
-    //         0 0 1
-    // YOUR CODE HERE
+    Matrix trans(3, 3);
+    trans.at(0, 0) = 1; trans.at(0, 1) = 0; trans.at(0, 2) = tx;
+    trans.at(1, 0) = 0; trans.at(1, 1) = 1; trans.at(1, 2) = ty;
+    trans.at(2, 0) = 0; trans.at(2, 1) = 0; trans.at(2, 2) = 1;
+    return trans;
 }
 
 // do the transformation menu
@@ -147,14 +142,27 @@ Matrix transformMenu()
         cin >> choice;
         choice = toupper(choice);
 
-        // TODO: Process the choice. I would do this with a handy switch
-        //       statement. Be sure to handle the invalid choice condition!
-        // As you build up the transformation matrix, you will need to
-        // multiply like this:
-        //     result = newTransform * result;
-        // Do a quick google search for "Affine Transformation Matrix" to
-        // get more details
-        // YOUR CODE HERE
+        switch(choice) {
+            case 'T':
+                cout << "Enter tx and ty: ";
+                cin >> x >> y;
+                result = translate(x, y) * result;
+                break;
+            case 'R':
+                cout << "Enter angle: ";
+                cin >> angle;
+                result = transRotate(angle) * result;
+                break;
+            case 'S':
+                cout << "Enter sx and sy: ";
+                cin >> x >> y;
+                result = transScale(x, y) * result;
+                break;
+            case 'D':
+                break;
+            default:
+                cout << "Invalid choice" << endl;
+        }
 
     }while(choice != 'D');
 
@@ -165,11 +173,12 @@ Matrix transformMenu()
 // get the point from the user 
 Matrix getPoint() 
 {
-    // TODO:  Get the x and y coordinate from the user and build a
-    //        3x1 matrix consisting of:
-    //          x
-    //          y
-    //          1
-    // Return your matrix at the end of the function.
-    // YOUR CODE HERE
+    double x, y;
+    cout << "Enter x and y: ";
+    cin >> x >> y;
+    Matrix point(3, 1);
+    point.at(0, 0) = x;
+    point.at(1, 0) = y;
+    point.at(2, 0) = 1;
+    return point;
 }
