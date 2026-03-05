@@ -72,8 +72,8 @@ int main() {
     int steps = static_cast<int>(duration / deltaTime);
 
     // Grid dimensions for plotting
-    int gridWidth = steps;
-    int gridHeight = position.at(1,0)+1;
+    int gridWidth = steps + 10; // Add some padding to the width
+    int gridHeight = static_cast<int>(position.at(1,0)) + 1;
 
     // Store the trajectory
     vector<Matrix> trajectory;

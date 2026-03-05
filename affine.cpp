@@ -104,7 +104,8 @@ Matrix transIdent()
 // build a rotation matrix
 Matrix transRotate(double angle)
 {
-    double rad = angle * M_PI / 180.0;
+    const double PI = 3.14159265358979323846;
+    double rad = angle * PI / 180.0;
     Matrix rot(3, 3);
     rot.at(0, 0) = cos(rad); rot.at(0, 1) = -sin(rad); rot.at(0, 2) = 0;
     rot.at(1, 0) = sin(rad); rot.at(1, 1) = cos(rad); rot.at(1, 2) = 0;

@@ -1,6 +1,6 @@
 /**
  * @file matrix.h
- * @author your name (you@domain.com)
+ * @author Cade Bivens (cbivens5@skyhawks.utm.edu)
  * @brief Class definition and operator prototypes of the Matrix class. 
  * @version 0.1
  * @date 2024-10-08
