@@ -8,7 +8,7 @@
  * 
  */
 
- //Functions from CoPilot, but I have used them to learn and take notes
+ //Functions from CoPilot, but I have used them to learn and take notes.
 
 #include "matrix.h"
 #include <iostream>
