@@ -79,9 +79,6 @@ int main()
     // transform points
     while(cin) {
         Matrix point = getPoint();
-        if (!cin) {
-            break;
-        }
         point = transform * point;
 
         // If we have a new point, display it.
@@ -153,17 +150,17 @@ Matrix transformMenu()
             case 'T':
                 cout << "Enter tx and ty: ";
                 cin >> x >> y;
-                result = result * translate(x,y);
+                result = translate(x, y) * result;
                 break;
             case 'R':
                 cout << "Enter angle: ";
                 cin >> angle;
-                result = result * transRotate(angle); 
+                result = transRotate(angle) * result;
                 break;
             case 'S':
                 cout << "Enter sx and sy: ";
                 cin >> x >> y;
-                result = result * transScale(x, y);
+                result = transScale(x, y) * result;
                 break;
             case 'D':
                 break;
