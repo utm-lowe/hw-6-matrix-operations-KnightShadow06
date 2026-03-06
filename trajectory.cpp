@@ -19,9 +19,9 @@ void plotTrajectory(const vector<Matrix>& trajectory, int gridWidth, int gridHei
     vector<vector<char>> grid(gridHeight, vector<char>(gridWidth, ' '));
 
     // Plot each position in the trajectory
-    for (const auto& position : trajectory) {
-        int x = static_cast<int>(position.at(0, 0));
-        int y = static_cast<int>(position.at(1, 0));
+    for (int i = 0; i < trajectory.size(); i++) {
+    int x = i;
+    int y = static_cast<int>(trajectory[i].at(1,0));
 
         // Ensure the coordinates are within the grid bounds
         if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight) {
@@ -41,9 +41,14 @@ void plotTrajectory(const vector<Matrix>& trajectory, int gridWidth, int gridHei
 int main() {
     // Get the initial conditions
     double x,y,vx,vy;
+    cout << "Position is in meters and velocity is in meters per second." << endl;
+    cout << "Initial x position: ";
     cin >> x;
+    cout << "Initial y position: ";
     cin >> y;
+    cout << "Inital x velocity: ";
     cin >> vx;
+    cout << "Inital y velocity: ";
     cin >> vy;
 
     // Initial position (x, y)
@@ -60,17 +65,20 @@ int main() {
 
     // Simulation duration
     double duration; // seconds
+    cout << "Simulation Duration (seconds): ";
     cin >> duration;
 
     // Number of steps
     int steps = static_cast<int>(duration / deltaTime);
 
     // Grid dimensions for plotting
-    int gridWidth = steps + 10; // Add some padding to the width
+    int gridWidth = steps; // Add some padding to the width
     int gridHeight = static_cast<int>(position.at(1,0)) + 1;
 
     // Store the trajectory
     vector<Matrix> trajectory;
+
+    trajectory.push_back(position);
 
     // Run the simulation
     for (int i = 0; i < steps; ++i) {
@@ -78,6 +86,8 @@ int main() {
         velocity = velocity + gravity * deltaTime;
         if (position.at(1, 0) > gridHeight - 1) {
             gridHeight = static_cast<int>(position.at(1, 0)) + 1;
+        if(position.at(1,0) < 0)
+            break;
         }
 
         // We will be talking about the vector object a little later. If you 
@@ -90,4 +100,3 @@ int main() {
     plotTrajectory(trajectory, gridWidth, gridHeight);
 
     return 0;
-}
