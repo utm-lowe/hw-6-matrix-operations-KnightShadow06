@@ -153,7 +153,7 @@ Matrix transformMenu()
                 result = translate(x, y) * result;
                 break;
             case 'R':
-                cout << "Enter the angle of rotation: ";
+                cout << "Enter the angle of rotation (degrees): ";
                 cin >> angle;
                 result = transRotate(angle) * result;
                 break;
