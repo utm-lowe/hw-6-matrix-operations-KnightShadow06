@@ -148,24 +148,24 @@ Matrix transformMenu()
 
         switch(choice) {
             case 'T':
-                cout << "Enter tx and ty: ";
+                cout << "Enter the x and y translation: ";
                 cin >> x >> y;
                 result = translate(x, y) * result;
                 break;
             case 'R':
-                cout << "Enter angle: ";
+                cout << "Enter the angle of rotation: ";
                 cin >> angle;
                 result = transRotate(angle) * result;
                 break;
             case 'S':
-                cout << "Enter sx and sy: ";
+                cout << "Enter the x and y scaling factors: ";
                 cin >> x >> y;
                 result = transScale(x, y) * result;
                 break;
             case 'D':
                 break;
             default:
-                cout << "Invalid choice" << endl;
+                cout << "Invalid choice. Please try again." << endl;
         }
 
     }while(choice != 'D');
